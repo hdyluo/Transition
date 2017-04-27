@@ -24,6 +24,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor brownColor];
+    
+    YGInteractor * interactor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionLeft edgeSpacing:0 forView:self.view];
+    __weak typeof(self) weakSelf = self;
+    [self yg_addBackInteractor:interactor action:^{
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 

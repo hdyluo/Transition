@@ -76,9 +76,10 @@
                 *stop = YES;
             }
         }];
-        [UIView animateWithDuration:weakSelf.timeInterval animations:^{
+        [UIView animateWithDuration:.3 animations:^{
             fromVC.view.alpha = 0;
             bgView.alpha = 0;
+            fromVC.view.transform = CGAffineTransformMakeScale(.8, .8);
         } completion:^(BOOL finished) {
             BOOL isCanceled = [context transitionWasCancelled];
             [context completeTransition:!isCanceled];

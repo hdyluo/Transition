@@ -88,16 +88,7 @@
     YGVC1Animator * backAnimator = [[YGVC1Animator alloc] initWithType:1];
     transition.backAnimator = backAnimator;
     
-    YGInteractor * interactor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionLeft edgeSpacing:0 forView:vc.view];
-    __weak typeof(vc) weakVC = vc;
-    [vc yg_addBackInteractor:interactor action:^{                           //给vc关联个返回手势
-        [weakVC dismissViewControllerAnimated:YES completion:nil];
-    }];
     [self yg_presentViewController:vc withTransition:transition];
-    
-//    [vc yg_addBackInteractor:interactor action:^{
-//        [weakVC.navigationController popViewControllerAnimated:YES];
-//    }];
 //    [self yg_pushViewController:vc withTransition:transition];
 }
 

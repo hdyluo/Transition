@@ -32,18 +32,30 @@ const char * kBackInteractorKey;        //回来手势关联对象
 
 - (void)_yg_setTransitionWithVC:(UIViewController *)vc transition:(YGTransition *)transition{
     objc_setAssociatedObject(vc, &kTransitionKey, transition, OBJC_ASSOCIATION_RETAIN_NONATOMIC);       //给 toVC关联一个转场对象,避免delegate 释放，delegate 是弱引用类型的 --------大坑
-    [transition setValue:objc_getAssociatedObject(self, kToInteractorKey) forKey:@"toInteractor"];
-    [transition setValue:objc_getAssociatedObject(vc, kBackInteractorKey) forKey:@"backInteractor"];
+    YGInteractor * toInterActor = objc_getAssociatedObject(self, &kToInteractorKey);
+    if (toInterActor) {
+        [transition setValue:toInterActor forKey:@"toInteractor"];
+    }
+    YGInteractor * backInteractor = objc_getAssociatedObject(vc, &kBackInteractorKey);
+    if (backInteractor) {
+        [transition setValue:backInteractor forKey:@"backInteractor"];
+    }
 }
 
 - (void)yg_addToInteractor:(YGInteractor *)interactor action:(void (^)())block {
-    objc_setAssociatedObject(self, kToInteractorKey, interactor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);                //为当前对象关联去向手势
+    objc_setAssociatedObject(self, &kToInteractorKey, interactor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);                //去向手势一定先于转场对象创建，所以直接关联
     interactor.transitionAction = block;
 }
 
 - (void)yg_addBackInteractor:(YGInteractor *)interactor action:(void (^)())block{                                   //为当前对象关联返回手势
-    objc_setAssociatedObject(self, kBackInteractorKey, interactor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     interactor.transitionAction = block;
+    YGTransition * transition = objc_getAssociatedObject(self, &kTransitionKey);
+    if (transition && [transition isKindOfClass:[YGTransition class]]) {    //如果转场对象存在，表明手势是在下级页面添加的，这里直接添加就行
+        [transition setValue:interactor forKey:@"backInteractor"];
+        return;
+    }
+    objc_setAssociatedObject(self, &kBackInteractorKey, interactor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);//如果转场对象不存在，表明手势是在present 或者 push 之前添加的，需要关联一下，在添加transition的时候将手势加进去
+    
 }
 
 
