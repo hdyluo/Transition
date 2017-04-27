@@ -24,6 +24,11 @@ const char * kBackInteractorKey;        //回来手势关联对象
     [self presentViewController:vc animated:YES completion:nil];
 }
 
+- (void)yg_presentCustomViewController:(UIViewController *)controller withTransition:(YGTransition *)transition{
+    controller.modalPresentationStyle = UIModalPresentationCustom;
+    [self yg_presentViewController:controller withTransition:transition];
+}
+
 - (void)yg_pushViewController:(UIViewController *)vc withTransition:(YGTransition *)transition{
     self.navigationController.delegate = transition;
     [self _yg_setTransitionWithVC:vc transition:transition];

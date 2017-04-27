@@ -33,21 +33,16 @@
         UIViewController * toVC = [context viewControllerForKey:UITransitionContextToViewControllerKey];
         UIView * containView = [context containerView];
         [containView addSubview:toVC.view];
-        UIImage * snapShot = [fromVC.view snapshotImage];
-        UIView * extraView = [[UIImageView alloc] initWithImage:snapShot];
-        extraView.frame = fromVC.view.bounds;
-        [containView insertSubview:extraView belowSubview:toVC.view];
         
         UIView * backgroundView = [[UIView alloc] init];
         backgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:.5];
         backgroundView.frame = fromVC.view.bounds;
         backgroundView.tag = 100;
-        [containView insertSubview:backgroundView aboveSubview:extraView];
+        [containView insertSubview:backgroundView belowSubview:toVC.view];
         
         toVC.view.frame = CGRectMake(0, 0, 300, 200);
         toVC.view.center = containView.center;
         
-       // containView.alpha = 0;
         toVC.view.transform = CGAffineTransformMakeScale(.6, .6);
         toVC.view.alpha = 0;
         backgroundView.alpha = 0;
@@ -62,13 +57,11 @@
 }
 
 - (void)addBackAnimator{
-    __weak typeof(self) weakSelf = self;
+ //   __weak typeof(self) weakSelf = self;
     self.animatorBlock = ^(id<UIViewControllerContextTransitioning> context) {
         UIViewController * fromVC = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
         UIViewController * toVC = [context viewControllerForKey:UITransitionContextToViewControllerKey];
         UIView * containView = [context containerView];
-        //[containView addSubview:toVC.view];
-        [containView insertSubview:toVC.view atIndex:0];
         __block UIView * bgView = nil;
         [containView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.tag == 100) {

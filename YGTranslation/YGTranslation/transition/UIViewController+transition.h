@@ -12,12 +12,21 @@
 @interface UIViewController (transition)
 
 /**
- 自定义modal转场
+ 自定义modal转场,fullScreen转场:转场结束后，fromVC.view会移除视图,对于手势驱动完全支持
 
  @param controller 下级页面
  @param transition 转场对象
  */
 - (void)yg_presentViewController:(UIViewController *)controller withTransition:(YGTransition *)transition;
+
+
+/**
+ 自定义modal转场，custom转场，转场结束后fromVC.view不会移除视图，对于手势驱动只支持一半
+
+ @param controller 下级页面
+ @param transition 转场对象
+ */
+- (void)yg_presentCustomViewController:(UIViewController *)controller withTransition:(YGTransition *)transition;
 
 /**
  添加去向交互转场

@@ -89,7 +89,7 @@
     transition.backAnimator = backAnimator;
     
     [self yg_presentViewController:vc withTransition:transition];
-//    [self yg_pushViewController:vc withTransition:transition];
+  //  [self yg_pushViewController:vc withTransition:transition];
 }
 
 - (void)_alertWithVC:(UIViewController *)vc{
@@ -99,7 +99,7 @@
     transition.toAnimator  = toAnimator;
     transition.backAnimator = backAnimator;
     
-    [self yg_presentViewController:vc withTransition:transition];
+    [self yg_presentCustomViewController:vc withTransition:transition];
 }
 
 

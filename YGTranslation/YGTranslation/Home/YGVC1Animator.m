@@ -52,7 +52,7 @@
         UIViewController * fromVC = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
         UIViewController * toVC = [context viewControllerForKey:UITransitionContextToViewControllerKey];
         UIView * containView = [context containerView];
-        [containView addSubview:toVC.view];
+        [containView addSubview:toVC.view];           
         [UIView animateWithDuration:weakSelf.timeInterval animations:^{
             fromVC.view.transform = CGAffineTransformMakeTranslation(-200, 0);
             toVC.view.transform = CGAffineTransformIdentity;

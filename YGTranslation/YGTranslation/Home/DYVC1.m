@@ -29,6 +29,7 @@
     __weak typeof(self) weakSelf = self;
     [self yg_addBackInteractor:interactor action:^{
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
+       // [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
 }
 

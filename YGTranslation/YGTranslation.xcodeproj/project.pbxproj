@@ -23,6 +23,7 @@
 		B090E8FE1EB1F28800FAEBCD /* UIView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = B090E8FD1EB1F28800FAEBCD /* UIView+Snapshot.m */; };
 		B090E9011EB1F46300FAEBCD /* YGVC2Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = B090E9001EB1F46300FAEBCD /* YGVC2Animator.m */; };
 		B0D553D81EB07C9800E9C689 /* YGVC1Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D553D71EB07C9800E9C689 /* YGVC1Animator.m */; };
+		B0EA2CB51EB2335200407767 /* YGVC3Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EA2CB41EB2335200407767 /* YGVC3Animator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,8 @@
 		B090E9001EB1F46300FAEBCD /* YGVC2Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGVC2Animator.m; sourceTree = "<group>"; };
 		B0D553D61EB07C9800E9C689 /* YGVC1Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGVC1Animator.h; sourceTree = "<group>"; };
 		B0D553D71EB07C9800E9C689 /* YGVC1Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGVC1Animator.m; sourceTree = "<group>"; };
+		B0EA2CB31EB2335200407767 /* YGVC3Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGVC3Animator.h; sourceTree = "<group>"; };
+		B0EA2CB41EB2335200407767 /* YGVC3Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGVC3Animator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				B090E9001EB1F46300FAEBCD /* YGVC2Animator.m */,
 				B05AD5561EADA50D008C4EDB /* DYVC3.h */,
 				B05AD5571EADA50D008C4EDB /* DYVC3.m */,
+				B0EA2CB31EB2335200407767 /* YGVC3Animator.h */,
+				B0EA2CB41EB2335200407767 /* YGVC3Animator.m */,
 				B05AD5591EADA59F008C4EDB /* DYVC4.h */,
 				B05AD55A1EADA59F008C4EDB /* DYVC4.m */,
 			);
@@ -229,6 +234,7 @@
 				B07528361E8B7E7A000C7C3F /* YGTransition.m in Sources */,
 				B075281B1E8B6467000C7C3F /* main.m in Sources */,
 				B07528391E8B7E8E000C7C3F /* YGAnimator.m in Sources */,
+				B0EA2CB51EB2335200407767 /* YGVC3Animator.m in Sources */,
 				B07528331E8B64A6000C7C3F /* UIViewController+transition.m in Sources */,
 				B090E8FE1EB1F28800FAEBCD /* UIView+Snapshot.m in Sources */,
 				B0D553D81EB07C9800E9C689 /* YGVC1Animator.m in Sources */,
