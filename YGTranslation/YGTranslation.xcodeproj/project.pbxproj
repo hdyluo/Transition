@@ -20,6 +20,8 @@
 		B07528361E8B7E7A000C7C3F /* YGTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B07528351E8B7E7A000C7C3F /* YGTransition.m */; };
 		B07528391E8B7E8E000C7C3F /* YGAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B07528381E8B7E8E000C7C3F /* YGAnimator.m */; };
 		B075283C1E8B7E9D000C7C3F /* YGInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = B075283B1E8B7E9D000C7C3F /* YGInteractor.m */; };
+		B090E8FE1EB1F28800FAEBCD /* UIView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = B090E8FD1EB1F28800FAEBCD /* UIView+Snapshot.m */; };
+		B090E9011EB1F46300FAEBCD /* YGVC2Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = B090E9001EB1F46300FAEBCD /* YGVC2Animator.m */; };
 		B0D553D81EB07C9800E9C689 /* YGVC1Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D553D71EB07C9800E9C689 /* YGVC1Animator.m */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,10 @@
 		B07528381E8B7E8E000C7C3F /* YGAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGAnimator.m; sourceTree = "<group>"; };
 		B075283A1E8B7E9D000C7C3F /* YGInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGInteractor.h; sourceTree = "<group>"; };
 		B075283B1E8B7E9D000C7C3F /* YGInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGInteractor.m; sourceTree = "<group>"; };
+		B090E8FC1EB1F28800FAEBCD /* UIView+Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Snapshot.h"; sourceTree = "<group>"; };
+		B090E8FD1EB1F28800FAEBCD /* UIView+Snapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Snapshot.m"; sourceTree = "<group>"; };
+		B090E8FF1EB1F46300FAEBCD /* YGVC2Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGVC2Animator.h; sourceTree = "<group>"; };
+		B090E9001EB1F46300FAEBCD /* YGVC2Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGVC2Animator.m; sourceTree = "<group>"; };
 		B0D553D61EB07C9800E9C689 /* YGVC1Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGVC1Animator.h; sourceTree = "<group>"; };
 		B0D553D71EB07C9800E9C689 /* YGVC1Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGVC1Animator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +81,8 @@
 				B0D553D71EB07C9800E9C689 /* YGVC1Animator.m */,
 				B05AD5531EADA501008C4EDB /* DYVC2.h */,
 				B05AD5541EADA501008C4EDB /* DYVC2.m */,
+				B090E8FF1EB1F46300FAEBCD /* YGVC2Animator.h */,
+				B090E9001EB1F46300FAEBCD /* YGVC2Animator.m */,
 				B05AD5561EADA50D008C4EDB /* DYVC3.h */,
 				B05AD5571EADA50D008C4EDB /* DYVC3.m */,
 				B05AD5591EADA59F008C4EDB /* DYVC4.h */,
@@ -125,6 +133,8 @@
 		B07528301E8B6488000C7C3F /* transition */ = {
 			isa = PBXGroup;
 			children = (
+				B090E8FC1EB1F28800FAEBCD /* UIView+Snapshot.h */,
+				B090E8FD1EB1F28800FAEBCD /* UIView+Snapshot.m */,
 				B07528311E8B64A6000C7C3F /* UIViewController+transition.h */,
 				B07528321E8B64A6000C7C3F /* UIViewController+transition.m */,
 				B07528341E8B7E7A000C7C3F /* YGTransition.h */,
@@ -210,6 +220,7 @@
 			files = (
 				B05AD5551EADA501008C4EDB /* DYVC2.m in Sources */,
 				B05AD55B1EADA59F008C4EDB /* DYVC4.m in Sources */,
+				B090E9011EB1F46300FAEBCD /* YGVC2Animator.m in Sources */,
 				B075283C1E8B7E9D000C7C3F /* YGInteractor.m in Sources */,
 				B05AD5521EADA4F1008C4EDB /* DYVC1.m in Sources */,
 				B05AD5581EADA50D008C4EDB /* DYVC3.m in Sources */,
@@ -219,6 +230,7 @@
 				B075281B1E8B6467000C7C3F /* main.m in Sources */,
 				B07528391E8B7E8E000C7C3F /* YGAnimator.m in Sources */,
 				B07528331E8B64A6000C7C3F /* UIViewController+transition.m in Sources */,
+				B090E8FE1EB1F28800FAEBCD /* UIView+Snapshot.m in Sources */,
 				B0D553D81EB07C9800E9C689 /* YGVC1Animator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

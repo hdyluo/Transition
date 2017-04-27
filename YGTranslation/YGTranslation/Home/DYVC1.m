@@ -11,6 +11,7 @@
 
 @interface DYVC1 ()
 
+
 @end
 
 @implementation DYVC1
@@ -25,9 +26,5 @@
     self.view.backgroundColor = [UIColor brownColor];
 }
 
-
-//- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
 
 @end

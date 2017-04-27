@@ -9,6 +9,7 @@
 #import "DYMainVC.h"
 #import "UIViewController+transition.h"
 #import "YGVC1Animator.h"
+#import "YGVC2Animator.h"
 
 
 @interface DYMainVC ()<UITableViewDelegate,UITableViewDataSource>{
@@ -26,8 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    _titles = @[@"modal转场1",@"modal转场2",@"modal转场3",@"modal转场4"];
+    self.view.backgroundColor = [UIColor whiteColor];   
+    _titles = @[@"左滑或点击弹出抽屉",@"点击弹出警告框",@"modal转场3",@"modal转场4"];
     _vcs = @[@"DYVC1",@"DYVC2",@"DYVC3",@"DYVC4"];
     [self.view addSubview:self.tableView];
     [self addtransition];
@@ -35,7 +36,7 @@
 }
 
 - (void)addtransition{
-    YGInteractor * toInteractor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionLeft edgeSpacing:0 forView:self.view];
+    YGInteractor * toInteractor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionRight edgeSpacing:0 forView:self.view];
     __weak typeof(self) weakSelf = self;
     [self yg_addToInteractor:toInteractor action:^{
         UIViewController * toVC = [[NSClassFromString(@"DYVC1") alloc] init];
@@ -66,7 +67,9 @@
             [self _transitionWithVC:vc];
         }
             break;
-        case 1:
+        case 1:{
+            [self _alertWithVC:vc];
+        }
             break;
         case 2:
             break;
@@ -85,17 +88,27 @@
     YGVC1Animator * backAnimator = [[YGVC1Animator alloc] initWithType:1];
     transition.backAnimator = backAnimator;
     
-    YGInteractor * interactor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionRight edgeSpacing:0 forView:vc.view];
+    YGInteractor * interactor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionLeft edgeSpacing:0 forView:vc.view];
     __weak typeof(vc) weakVC = vc;
-//    [vc yg_addBackInteractor:interactor action:^{                           //给vc关联个返回手势
-//        [weakVC dismissViewControllerAnimated:YES completion:nil];
-//    }];
-//    [self yg_presentViewController:vc withTransition:transition];
-    
-    [vc yg_addBackInteractor:interactor action:^{
-        [weakVC.navigationController popViewControllerAnimated:YES];
+    [vc yg_addBackInteractor:interactor action:^{                           //给vc关联个返回手势
+        [weakVC dismissViewControllerAnimated:YES completion:nil];
     }];
-    [self yg_pushViewController:vc withTransition:transition];
+    [self yg_presentViewController:vc withTransition:transition];
+    
+//    [vc yg_addBackInteractor:interactor action:^{
+//        [weakVC.navigationController popViewControllerAnimated:YES];
+//    }];
+//    [self yg_pushViewController:vc withTransition:transition];
+}
+
+- (void)_alertWithVC:(UIViewController *)vc{
+    YGVC2Animator * toAnimator = [[YGVC2Animator alloc] initWithType:0];
+    YGVC2Animator * backAnimator = [[YGVC2Animator alloc] initWithType:1];
+    YGTransition * transition = [[YGTransition alloc] init];
+    transition.toAnimator  = toAnimator;
+    transition.backAnimator = backAnimator;
+    
+    [self yg_presentViewController:vc withTransition:transition];
 }
 
 
