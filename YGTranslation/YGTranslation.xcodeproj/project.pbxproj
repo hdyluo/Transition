@@ -20,7 +20,6 @@
 		B07528361E8B7E7A000C7C3F /* YGTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B07528351E8B7E7A000C7C3F /* YGTransition.m */; };
 		B07528391E8B7E8E000C7C3F /* YGAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B07528381E8B7E8E000C7C3F /* YGAnimator.m */; };
 		B075283C1E8B7E9D000C7C3F /* YGInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = B075283B1E8B7E9D000C7C3F /* YGInteractor.m */; };
-		B090E8FB1EB1964800FAEBCD /* UIView+ygSnapShotImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B090E8FA1EB1964800FAEBCD /* UIView+ygSnapShotImage.m */; };
 		B0D553D81EB07C9800E9C689 /* YGVC1Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D553D71EB07C9800E9C689 /* YGVC1Animator.m */; };
 /* End PBXBuildFile section */
 
@@ -50,8 +49,6 @@
 		B07528381E8B7E8E000C7C3F /* YGAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGAnimator.m; sourceTree = "<group>"; };
 		B075283A1E8B7E9D000C7C3F /* YGInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGInteractor.h; sourceTree = "<group>"; };
 		B075283B1E8B7E9D000C7C3F /* YGInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGInteractor.m; sourceTree = "<group>"; };
-		B090E8F91EB1964800FAEBCD /* UIView+ygSnapShotImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ygSnapShotImage.h"; sourceTree = "<group>"; };
-		B090E8FA1EB1964800FAEBCD /* UIView+ygSnapShotImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ygSnapShotImage.m"; sourceTree = "<group>"; };
 		B0D553D61EB07C9800E9C689 /* YGVC1Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGVC1Animator.h; sourceTree = "<group>"; };
 		B0D553D71EB07C9800E9C689 /* YGVC1Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGVC1Animator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,8 +127,6 @@
 			children = (
 				B07528311E8B64A6000C7C3F /* UIViewController+transition.h */,
 				B07528321E8B64A6000C7C3F /* UIViewController+transition.m */,
-				B090E8F91EB1964800FAEBCD /* UIView+ygSnapShotImage.h */,
-				B090E8FA1EB1964800FAEBCD /* UIView+ygSnapShotImage.m */,
 				B07528341E8B7E7A000C7C3F /* YGTransition.h */,
 				B07528351E8B7E7A000C7C3F /* YGTransition.m */,
 				B07528371E8B7E8E000C7C3F /* YGAnimator.h */,
@@ -220,7 +215,6 @@
 				B05AD5581EADA50D008C4EDB /* DYVC3.m in Sources */,
 				B05AD54C1EADA1C9008C4EDB /* DYMainVC.m in Sources */,
 				B075281E1E8B6467000C7C3F /* AppDelegate.m in Sources */,
-				B090E8FB1EB1964800FAEBCD /* UIView+ygSnapShotImage.m in Sources */,
 				B07528361E8B7E7A000C7C3F /* YGTransition.m in Sources */,
 				B075281B1E8B6467000C7C3F /* main.m in Sources */,
 				B07528391E8B7E8E000C7C3F /* YGAnimator.m in Sources */,

@@ -26,7 +26,8 @@
 }
 
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-}
+//- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 @end

@@ -30,6 +30,17 @@
     _titles = @[@"modal转场1",@"modal转场2",@"modal转场3",@"modal转场4"];
     _vcs = @[@"DYVC1",@"DYVC2",@"DYVC3",@"DYVC4"];
     [self.view addSubview:self.tableView];
+    [self addtransition];
+    
+}
+
+- (void)addtransition{
+    YGInteractor * toInteractor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionLeft edgeSpacing:0 forView:self.view];
+    __weak typeof(self) weakSelf = self;
+    [self yg_addToInteractor:toInteractor action:^{
+        UIViewController * toVC = [[NSClassFromString(@"DYVC1") alloc] init];
+        [weakSelf _transitionWithVC:toVC];
+    }];
 }
 
 #pragma mark - delegate and datasource
@@ -74,16 +85,17 @@
     YGVC1Animator * backAnimator = [[YGVC1Animator alloc] initWithType:1];
     transition.backAnimator = backAnimator;
     
-    YGInteractor * backInteractor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionRight edgeSpacing:0 forView:vc.view];
-    transition.backInteractor = backInteractor;
-    backInteractor.canOverPercent = 0.3;
+    YGInteractor * interactor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionRight edgeSpacing:0 forView:vc.view];
+    __weak typeof(vc) weakVC = vc;
+//    [vc yg_addBackInteractor:interactor action:^{                           //给vc关联个返回手势
+//        [weakVC dismissViewControllerAnimated:YES completion:nil];
+//    }];
+//    [self yg_presentViewController:vc withTransition:transition];
     
-    
-    [self yg_readyForPresentWithToVC:vc withTransition:transition];
-    [self presentViewController:vc animated:YES completion:nil];
-    
- //   [self yg_readyForPushWithToVC:vc withTransition:transition];
- //   [self.navigationController pushViewController:vc animated:YES];
+    [vc yg_addBackInteractor:interactor action:^{
+        [weakVC.navigationController popViewControllerAnimated:YES];
+    }];
+    [self yg_pushViewController:vc withTransition:transition];
 }
 
 

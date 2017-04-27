@@ -11,12 +11,36 @@
 
 @interface UIViewController (transition)
 
+/**
+ 自定义modal转场
 
-- (void)yg_readyForPresentWithToVC:(UIViewController *)vc withTransition:(YGTransition *)transition;
+ @param controller 下级页面
+ @param transition 转场对象
+ */
+- (void)yg_presentViewController:(UIViewController *)controller withTransition:(YGTransition *)transition;
 
-- (void)yg_readyForPushWithToVC:(UIViewController *)vc withTransition:(YGTransition *)transition;
+/**
+ 添加去向交互转场
 
+ @param interactor 交互对象
+ @param block 页面跳转方式回调
+ */
+- (void)yg_addToInteractor:(YGInteractor *)interactor action:(void(^)())block;
 
-//- (void)yg_readyForPresentWithToClass:(Class)vcClass withTransition:(YGTransition *)transition;
+/**
+ 添加返回交互转场
+
+ @param interactor 交互对象
+ @param block 页面跳转方式回调
+ */
+- (void)yg_addBackInteractor:(YGInteractor *)interactor action:(void(^)())block;
+
+/**
+ 自定义navigation转场
+
+ @param vc 下级页面
+ @param trnasition 转场对象
+ */
+- (void)yg_pushViewController:(UIViewController *)vc withTransition:(YGTransition *)trnasition;
 
 @end

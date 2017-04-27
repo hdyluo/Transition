@@ -15,13 +15,6 @@ typedef NS_ENUM(NSInteger,YGInteractorDirection) {
     YGInteractorDirectionBottom                             //从上向下滑
 };
 
-@class YGInteractor;
-@protocol YGInteractorStateDelegate <NSObject>
-
-@required
-- (void)interactDidBeginWith:(YGInteractor *)interactor;
-
-@end
 
 @interface YGInteractor : UIPercentDrivenInteractiveTransition
 
@@ -33,9 +26,9 @@ typedef NS_ENUM(NSInteger,YGInteractorDirection) {
 
 @property (nonatomic,assign) NSInteger tag;
 
-@property (nonatomic,weak) id<YGInteractorStateDelegate> delegate;
 
 - (instancetype)initWithDirection:(YGInteractorDirection)direction edgeSpacing:(CGFloat)spacing forView:(UIView *)view ;
 
+@property (nonatomic,copy) void (^transitionAction)();
 
 @end

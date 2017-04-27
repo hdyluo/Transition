@@ -48,8 +48,8 @@
             _startPoint = [panGesture translationInView:panGesture.view];                       //不能用localtionInView   -------------超级大坑
             _percent = 0;
             self.canInteracive = YES;
-            if (self.delegate && [self.delegate respondsToSelector:@selector(interactDidBeginWith:)]) { //必须实现，才能正常手势交互转场，---------超级大坑
-                [self.delegate interactDidBeginWith:self];
+            if (self.transitionAction) {
+                self.transitionAction();
             }
             break;
         case UIGestureRecognizerStateChanged:{

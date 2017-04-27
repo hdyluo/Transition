@@ -27,12 +27,6 @@ typedef NS_ENUM(NSInteger,YGTransitionType) {
 
 @property (nonatomic, strong) YGAnimator * backAnimator;
 
-@property (nonatomic, strong) YGInteractor * toInteractor;            
 
-@property (nonatomic, strong) YGInteractor * backInteractor;
-
-@property (nonatomic, copy) void (^backInteractBlock)();
-
-@property (nonatomic, copy) void (^toInteractBlock)();
 
 @end
