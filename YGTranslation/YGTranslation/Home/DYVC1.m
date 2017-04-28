@@ -17,7 +17,6 @@
 @implementation DYVC1
 
 - (void)dealloc{
-    
     NSLog(@"%@释放",NSStringFromClass([self class]));
 }
 
@@ -25,11 +24,15 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor brownColor];
     
+    [self _addBackInteractor];
+}
+
+- (void)_addBackInteractor{
     YGInteractor * interactor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionLeft edgeSpacing:0 forView:self.view];
     __weak typeof(self) weakSelf = self;
     [self yg_addBackInteractor:interactor action:^{
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
-       // [weakSelf.navigationController popViewControllerAnimated:YES];
+        // [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
 }
 

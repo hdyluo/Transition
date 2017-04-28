@@ -14,6 +14,10 @@
 
 @implementation DYVC2
 
+- (void)dealloc{
+    NSLog(@"%@释放",NSStringFromClass([self class]));
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor brownColor];

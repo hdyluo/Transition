@@ -52,7 +52,7 @@
         UIViewController * fromVC = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
         UIViewController * toVC = [context viewControllerForKey:UITransitionContextToViewControllerKey];
         UIView * containView = [context containerView];
-        [containView addSubview:toVC.view];           
+        [containView addSubview:toVC.view];                             //对于fullscreenmodal转场来说，转场开始tovc.view会自动加入到containView中，对于Navigation转场来说，需要手动加入
         [UIView animateWithDuration:weakSelf.timeInterval animations:^{
             fromVC.view.transform = CGAffineTransformMakeTranslation(-200, 0);
             toVC.view.transform = CGAffineTransformIdentity;
