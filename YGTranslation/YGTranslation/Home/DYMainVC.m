@@ -10,6 +10,7 @@
 #import "UIViewController+transition.h"
 #import "YGVC1Animator.h"
 #import "YGVC2Animator.h"
+#import "YGVC3Animator.h"
 
 
 @interface DYMainVC ()<UITableViewDelegate,UITableViewDataSource>{
@@ -72,6 +73,7 @@
         }
             break;
         case 2:
+            [self _pushWithVC:vc];
             break;
         case 3:
             break;
@@ -100,6 +102,17 @@
     transition.backAnimator = backAnimator;
     
     [self yg_presentCustomViewController:vc withTransition:transition];
+}
+
+- (void)_pushWithVC:(UIViewController *)vc{
+    YGTransition * transition = [[YGTransition alloc] init];
+    YGVC3Animator * toAnimator = [[YGVC3Animator alloc] initWithType:0];
+    transition.toAnimator = toAnimator;
+    YGVC3Animator * backAnimator = [[YGVC3Animator alloc] initWithType:1];
+    transition.backAnimator = backAnimator;
+    
+    //   [self yg_presentViewController:vc withTransition:transition];
+    [self yg_pushViewController:vc withTransition:transition];
 }
 
 

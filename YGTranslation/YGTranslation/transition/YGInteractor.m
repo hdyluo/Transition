@@ -37,6 +37,7 @@
         self.canOverPercent = .5;
         self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureAction:)];
         [view addGestureRecognizer:self.panGesture];
+        self.panGesture.delegate = self;
     }
     return self;
 }

@@ -10,5 +10,7 @@
 
 @interface YGVC3Animator : YGAnimator
 
+- (instancetype)initWithType:(NSInteger)type;   // 0:to  1:back
+
 
 @end
