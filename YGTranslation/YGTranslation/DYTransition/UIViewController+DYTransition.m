@@ -38,6 +38,7 @@ const char * dy_transition_weak_key;
 - (void)dy_presentWithAnimatorTo:(UIViewController *)vc{
     DYTransition * transition = objc_getAssociatedObject(self, &dy_transitionKey);
     if (!transition) {
+        NSLog(@"需要先调用dy_addToAnimator");
         [self presentViewController:vc animated:YES completion:nil];
         return;
     }

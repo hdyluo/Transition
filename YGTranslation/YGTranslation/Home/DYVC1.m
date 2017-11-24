@@ -7,7 +7,7 @@
 //
 
 #import "DYVC1.h"
-#import "UIViewController+transition.h"
+#import "UIViewController+DYTransition.h"
 
 @interface DYVC1 ()
 
@@ -23,17 +23,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor brownColor];
-    
-//    [self _addBackInteractor];
+    [self addBackAction];
 }
 
-- (void)_addBackInteractor{
-    YGInteractor * interactor = [[YGInteractor alloc] initWithDirection:YGInteractorDirectionLeft edgeSpacing:0 forView:self.view];
+- (void)addBackAction{
+    DYTransitionAnimator * animator = [[DYTransitionAnimator alloc] init];
+    animator.animatorBlock = ^(id<UIViewControllerContextTransitioning> context) {
+        UIViewController * fromVC = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
+        UIViewController * toVC = [context viewControllerForKey:UITransitionContextToViewControllerKey];
+        UIView * containView = [context containerView];
+        [containView addSubview:toVC.view];                             //对于fullscreenmodal转场来说，转场开始tovc.view会自动加入到containView中，对于Navigation转场来说，需要手动加入
+        [UIView animateWithDuration:.5 animations:^{
+            fromVC.view.transform = CGAffineTransformMakeTranslation(-200, 0);
+            toVC.view.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            BOOL isCanceled = [context transitionWasCancelled];
+            [context completeTransition:!isCanceled];
+            if (isCanceled) {
+                [toVC.view removeFromSuperview];
+            }
+        }];
+    };
+    DYTransitionInteractor * interactor = [[DYTransitionInteractor alloc] initWithDirection:DYInteractorDirectionLeft];
     __weak typeof(self) weakSelf = self;
-    [self yg_addBackInteractor:interactor action:^{
+    interactor.transitionAction = ^{
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
-//         [weakSelf.navigationController popViewControllerAnimated:YES];
-    }];
+    };
+    [self dy_setBackAnimator:animator interactor:interactor WithType:DYTransitionTypeDismiss];
 }
 
 
