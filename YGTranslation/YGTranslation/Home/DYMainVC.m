@@ -106,7 +106,10 @@
         }];
     };
     DYTransitionInteractor * interacotr = [[DYTransitionInteractor alloc] initWithDirection:DYInteractorDirectionRight];
-    interacotr.speedControl = 1.5;
+    interacotr.speedControl = 1.5;              //管用
+    interacotr.edgeSpacing = 100;               //管用
+//    interacotr.canOverPercent = .3;             //管用
+    
     __weak typeof(self) weakSelf = self;
     interacotr.transitionAction = ^{
         __strong typeof(weakSelf) strongSelf = weakSelf;

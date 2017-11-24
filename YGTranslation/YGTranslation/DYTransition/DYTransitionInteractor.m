@@ -29,7 +29,7 @@
         self.speedControl = 1.0;
         self.edgeSpacing = 50;
         self.canOverPercent =.5f;
-        self.canOverVelocity = 5.0f;
+        self.canOverVelocity = 1000;
         self.interactorDirection = direction;
     }
     return self;
@@ -120,10 +120,61 @@
 }
 
 - (void)_calculateEndWithGesture{
-    if (_percent > self.canOverPercent) {
-        [self finishInteractiveTransition];
-    }else{
-        [self cancelInteractiveTransition];
+    CGPoint velocity = [self.panGesture velocityInView:self.panGesture.view];
+    NSLog(@"%@",NSStringFromCGPoint([self.panGesture velocityInView:self.panGesture.view]));
+    //速率大于1000直接完成，速率
+    
+    switch (self.interactorDirection) {
+        case DYInteractorDirectionTop:{
+            if (velocity.y < -1000) {
+                [self finishInteractiveTransition];
+            }else{
+                if (_percent > self.canOverPercent) {
+                    [self finishInteractiveTransition];
+                }else{
+                    [self cancelInteractiveTransition];
+                }
+            }
+        }
+            break;
+        case DYInteractorDirectionLeft:{
+            if (velocity.x < -1000) {
+                [self finishInteractiveTransition];
+            }else{
+                if (_percent > self.canOverPercent) {
+                    [self finishInteractiveTransition];
+                }else{
+                    [self cancelInteractiveTransition];
+                }
+            }
+        }
+            break;
+        case DYInteractorDirectionBottom:{
+            if (velocity.y > 1000) {
+                [self finishInteractiveTransition];
+            }else{
+                if (_percent > self.canOverPercent) {
+                    [self finishInteractiveTransition];
+                }else{
+                    [self cancelInteractiveTransition];
+                }
+            }
+        }
+            break;
+        case DYInteractorDirectionRight:{ //向右滑
+            if (velocity.x > 1000) {
+                 [self finishInteractiveTransition];
+            }else{
+                if (_percent > self.canOverPercent) {
+                    [self finishInteractiveTransition];
+                }else{
+                    [self cancelInteractiveTransition];
+                }
+            }
+        }
+            break;
+        default:
+            break;
     }
 }
 
