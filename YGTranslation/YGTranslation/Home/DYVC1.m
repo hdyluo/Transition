@@ -24,7 +24,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor brownColor];
     
-    [self _addBackInteractor];
+//    [self _addBackInteractor];
 }
 
 - (void)_addBackInteractor{
@@ -32,9 +32,13 @@
     __weak typeof(self) weakSelf = self;
     [self yg_addBackInteractor:interactor action:^{
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
-       //  [weakSelf.navigationController popViewControllerAnimated:YES];
+//         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
 }
 
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

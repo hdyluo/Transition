@@ -11,6 +11,8 @@
 #import "YGVC1Animator.h"
 #import "YGVC2Animator.h"
 #import "YGVC3Animator.h"
+#import "UIView+Snapshot.h"
+#import "UIViewController+DYTransition.h"
 
 
 @interface DYMainVC ()<UITableViewDelegate,UITableViewDataSource>{
@@ -32,8 +34,8 @@
     _titles = @[@"左滑或点击弹出抽屉",@"点击弹出警告框",@"modal转场3",@"modal转场4"];
     _vcs = @[@"DYVC1",@"DYVC2",@"DYVC3",@"DYVC4"];
     [self.view addSubview:self.tableView];
-    [self addtransition];
-    
+//    [self addtransition];
+    [self dy_transitionWithVC:nil];
 }
 
 - (void)addtransition{
@@ -65,7 +67,9 @@
     UIViewController * vc = [NSClassFromString(_vcs[indexPath.row]) new];
     switch (indexPath.row) {
         case 0:{
-            [self _transitionWithVC:vc];
+//            [self _transitionWithVC:vc];
+            UIViewController * toVC = [[NSClassFromString(@"DYVC1") alloc] init];
+            [self dy_presentWithAnimatorTo:toVC];
         }
             break;
         case 1:{
@@ -82,6 +86,36 @@
     }
 }
 
+- (void)dy_transitionWithVC:(UIViewController *)vc{
+    DYTransitionAnimator * animator = [[DYTransitionAnimator alloc] init];
+    animator.animatorBlock = ^(id<UIViewControllerContextTransitioning> context) {
+        UIViewController * fromVC = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
+        UIViewController * toVC = [context viewControllerForKey:UITransitionContextToViewControllerKey];
+        UIView * containView = [context containerView];
+        [containView addSubview:toVC.view];
+        toVC.view.transform = CGAffineTransformMakeTranslation(-200, 0);
+        UIImage * snapShot = [fromVC.view snapshotImage];
+        UIView * extraView = [[UIImageView alloc] initWithImage:snapShot];
+        extraView.frame = CGRectMake(200, 0, snapShot.size.width, snapShot.size.height);
+        [toVC.view addSubview:extraView];
+        [UIView animateWithDuration:.5 animations:^{
+            fromVC.view.transform = CGAffineTransformMakeTranslation(200, 0);
+            toVC.view.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            [context completeTransition:![context transitionWasCancelled]];
+        }];
+    };
+    DYTransitionInteractor * interacotr = [[DYTransitionInteractor alloc] initWithDirection:DYInteractorDirectionRight];
+    interacotr.speedControl = 1.5;
+    __weak typeof(self) weakSelf = self;
+    interacotr.transitionAction = ^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+         UIViewController * toVC = [[NSClassFromString(@"DYVC1") alloc] init];
+        [strongSelf dy_presentWithAnimatorTo:toVC];
+    };
+    [self dy_addToAnimator:animator interactor:interacotr];
+}
+
 
 - (void)_transitionWithVC:(UIViewController *)vc{
     YGTransition * transition = [[YGTransition alloc] init];
@@ -91,7 +125,7 @@
     transition.backAnimator = backAnimator;
     
     [self yg_presentViewController:vc withTransition:transition];
-  //  [self yg_pushViewController:vc withTransition:transition];
+//    [self yg_pushViewController:vc withTransition:transition];
 }
 
 - (void)_alertWithVC:(UIViewController *)vc{
