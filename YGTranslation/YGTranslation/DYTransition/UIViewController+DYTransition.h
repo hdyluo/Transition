@@ -13,9 +13,6 @@
 
 @property (nonatomic,weak) DYTransition * dy_transition;
 
-//- (void)dy_addTransition:(DYTransition *)transition;   //添加push转场的时候,delegate指向自己,在delloc的时候需要把delegate取消，下级页面的转场对象也是这个transition.(只有在参与push的对象才能调用)
-                                                       //添加present转场的时候，delegate指向下级页面。(只有在参与present的才能调用)
-
 
 - (void)dy_addToAnimator:(DYTransitionAnimator *)animator interactor:(DYTransitionInteractor *)interactor ; //action 里必须是dy_push 或者dy_present
 

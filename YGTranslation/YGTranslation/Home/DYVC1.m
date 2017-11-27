@@ -29,9 +29,7 @@
 - (void)addBackAction{
     DYTransitionAnimator * animator = [[DYTransitionAnimator alloc] init];
     animator.animatorBlock = ^(id<UIViewControllerContextTransitioning> context) {
-        UIViewController * fromVC = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
-        UIViewController * toVC = [context viewControllerForKey:UITransitionContextToViewControllerKey];
-        UIView * containView = [context containerView];
+        DY_GENERATE_TRANSITION_CONTEXT
         [containView addSubview:toVC.view];                             //对于fullscreenmodal转场来说，转场开始tovc.view会自动加入到containView中，对于Navigation转场来说，需要手动加入
         [UIView animateWithDuration:.5 animations:^{
             fromVC.view.transform = CGAffineTransformMakeTranslation(-200, 0);
@@ -45,6 +43,7 @@
         }];
     };
     DYTransitionInteractor * interactor = [[DYTransitionInteractor alloc] initWithDirection:DYInteractorDirectionLeft];
+    interactor.edgeSpacing = [UIScreen mainScreen].bounds.size.width * .5;
     __weak typeof(self) weakSelf = self;
     interactor.transitionAction = ^{
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
@@ -53,8 +52,8 @@
 }
 
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 @end

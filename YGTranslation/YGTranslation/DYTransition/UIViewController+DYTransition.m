@@ -52,9 +52,7 @@ const char * dy_transitionKey;
     DYTransition * transition = [[DYTransition alloc] init];
     transition.toInteractor = interactor;
     transition.toAnimator = animator;
-    if (transition && !objc_getAssociatedObject(self, &dy_transitionKey)) {
-        objc_setAssociatedObject(self, &dy_transitionKey, transition, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
+    objc_setAssociatedObject(self, &dy_transitionKey, transition, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     if (transition.toInteractor) {
         [self.view addGestureRecognizer:transition.toInteractor.panGesture];
     }
@@ -66,6 +64,7 @@ const char * dy_transitionKey;
         DYTransition * transition = [[DYTransition alloc] init];
         transition.backInteractor = interactor;
         transition.backAnimator = animator;
+        objc_setAssociatedObject(self, &dy_transitionKey, transition, OBJC_ASSOCIATION_RETAIN_NONATOMIC);//避免释放
         if (interactor) {
             [self.view addGestureRecognizer:interactor.panGesture];
         }
