@@ -12,9 +12,37 @@
 #define DY_NAV_SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define DY_NAV_SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
+
+
+@implementation UIViewController  (_DYNavigationItem)
+
+const char * dy_nav_custom_item_key;
+- (void)setDy_navigationItemView:(UIView *)dy_navigationItemView{
+    objc_setAssociatedObject(self, &dy_navigationItemView, dy_navigationItemView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    __block UIView * barBackgroundView = nil;
+//    __block UIView * itemContentView = nil;
+    [self.navigationController.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([NSStringFromClass([obj class]) isEqualToString:@"_UIBarBackground"]) {
+            barBackgroundView = obj;
+            * stop = YES;
+        }
+    }];
+    if (barBackgroundView) {
+        dy_navigationItemView.frame = barBackgroundView.bounds;
+        [barBackgroundView addSubview:dy_navigationItemView];
+    }
+}
+
+- (UIView *)dy_navigationItemView{
+    return objc_getAssociatedObject(self, &dy_nav_custom_item_key);
+}
+
+@end
+
+
+
+
 @implementation UINavigationController (DYTransition)
-
-
 
 const char * dy_nav_transition_key;
 - (void)dy_add_custom_transition{
@@ -89,34 +117,18 @@ const char * dy_nav_transition_key;
 }
 
 - (void)dy_hideNavigationBarBackground{
-    [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([NSStringFromClass([obj class]) isEqualToString:@"_UIBarBackground"]) {
-            [obj.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj_1, NSUInteger idx_1, BOOL * _Nonnull stop_1) {
-                obj_1.hidden = YES;
-            }];
-            * stop = YES;
-        }
-        
+    UIView * barBackground = [self _dy_navBar_backgroundView];
+    [barBackground.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj_1, NSUInteger idx_1, BOOL * _Nonnull stop_1) {
+        obj_1.hidden = YES;
     }];
 }
 
 - (void)dy_hideNavigationItem{
-    [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([NSStringFromClass([obj class]) isEqualToString:@"_UINavigationBarContentView"]) {
-            obj.hidden = YES;
-            * stop = YES;
-        }
-    }];
+    [self _dy_item_contentView].hidden = YES;
 }
 
 - (void)dy_addCustomNavigationItem:(UIView *)itemView keepSystemItems:(BOOL)needKeepSysItems{
-    __block UIView * barBackgroundView = nil;
-    [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([NSStringFromClass([obj class]) isEqualToString:@"_UIBarBackground"]) {
-            barBackgroundView = obj;
-            * stop = YES;
-        }
-    }];
+     UIView * barBackgroundView = [self _dy_navBar_backgroundView];
     if (barBackgroundView) {
         if (needKeepSysItems) {
             itemView.frame = barBackgroundView.bounds;
@@ -127,6 +139,29 @@ const char * dy_nav_transition_key;
         }
         
     }
+}
+
+
+- (UIView *)_dy_item_contentView{
+    __block UIView * itemContentView = nil;
+    [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([NSStringFromClass([obj class]) isEqualToString:@"_UINavigationBarContentView"]) {
+            itemContentView = obj;
+            * stop = YES;
+        }
+    }];
+    return itemContentView;
+}
+
+- (UIView *)_dy_navBar_backgroundView{
+    __block UIView * barBackgroundView = nil;
+    [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([NSStringFromClass([obj class]) isEqualToString:@"_UIBarBackground"]) {
+            barBackgroundView = obj;
+            * stop = YES;
+        }
+    }];
+    return barBackgroundView;
 }
 
 

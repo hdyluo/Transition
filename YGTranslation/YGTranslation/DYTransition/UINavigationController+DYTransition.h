@@ -20,7 +20,19 @@
 - (void)dy_addCustomNavigationItem:(UIView *)itemView keepSystemItems:(BOOL)needKeepSysItems;
 
 
+- (UIView *)_dy_item_contentView;
+
+- (UIView *)_dy_navBar_backgroundView;
 
 @end
+
+@interface UIViewController (_DYNavigationItem)
+
+@property (nonatomic,strong) UIView * dy_navigationItemView;
+
+@end
+
+
+
 
 
