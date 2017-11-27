@@ -24,16 +24,16 @@ const char * dy_transition_weak_key;
 
 
 
-- (void)dy_pushWithAnimatorTo:(UIViewController *)vc{
-    DYTransition * transition = objc_getAssociatedObject(self, &dy_transitionKey);
-    if (!transition) {
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-    self.navigationController.delegate = transition;
-    vc.dy_transition = transition;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//- (void)dy_pushWithAnimatorTo:(UIViewController *)vc{
+//    DYTransition * transition = objc_getAssociatedObject(self, &dy_transitionKey);
+//    if (!transition) {
+//        [self.navigationController pushViewController:vc animated:YES];
+//        return;
+//    }
+//    self.navigationController.delegate = transition;
+//    vc.dy_transition = transition;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (void)dy_presentWithAnimatorTo:(UIViewController *)vc{
     DYTransition * transition = objc_getAssociatedObject(self, &dy_transitionKey);
@@ -58,7 +58,7 @@ const char * dy_transitionKey;
     }
 }
 
-- (void)dy_setBackAnimator:(DYTransitionAnimator *)animator interactor:(DYTransitionInteractor *)interactor WithType:(DYTransitionType)type {
+- (void)dy_setBackAnimator:(DYTransitionAnimator *)animator interactor:(DYTransitionInteractor *)interactor {
     
     if (!self.dy_transition) {
         DYTransition * transition = [[DYTransition alloc] init];
@@ -68,11 +68,7 @@ const char * dy_transitionKey;
         if (interactor) {
             [self.view addGestureRecognizer:interactor.panGesture];
         }
-        if (type == DYTransitionTypePop) {
-            self.navigationController.delegate = transition;
-        }else if(type == DYTransitionTypeDismiss){
-            self.transitioningDelegate = transition;
-        }
+        self.transitioningDelegate = transition;
         return;
     }
     

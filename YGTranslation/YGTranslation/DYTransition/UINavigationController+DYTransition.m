@@ -19,7 +19,6 @@
 const char * dy_nav_transition_key;
 - (void)dy_add_custom_transition{
     DYTransition * transition = [[DYTransition alloc] init];
-    //可恶的iOS11改了转场的默认实现，不能用transform了
     transition.toAnimator = [[DYTransitionAnimator alloc] init];
     transition.toAnimator.timeInterval = .3;
     __weak typeof(transition) weakTransition = transition;
@@ -53,7 +52,6 @@ const char * dy_nav_transition_key;
         shadowView.layer.shadowRadius = 4;
         shadowView.layer.shadowOffset = CGSizeMake(-5, 5);
         shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-        
         
         [UIView animateWithDuration:.5 animations:^{
             fromVC.view.frame = CGRectMake(DY_NAV_SCREEN_WIDTH, 0, fromVC.view.frame.size.width, fromVC.view.frame.size.height);
@@ -92,13 +90,47 @@ const char * dy_nav_transition_key;
     objc_setAssociatedObject(self, &dy_nav_transition_key, transition, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)hideNavigationBar{
-    self.navigationBar.hidden = YES;
+- (void)dy_hideNavigationBarBackground{
+    [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([NSStringFromClass([obj class]) isEqualToString:@"_UIBarBackground"]) {
+            [obj.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj_1, NSUInteger idx_1, BOOL * _Nonnull stop_1) {
+                obj_1.hidden = YES;
+            }];
+            * stop = YES;
+        }
+        
+    }];
 }
 
-- (void)dy_addTransition:(DYTransition *)transition{
-    
+- (void)dy_hideNavigationItem{
+    [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([NSStringFromClass([obj class]) isEqualToString:@"_UINavigationBarContentView"]) {
+            obj.hidden = YES;
+            * stop = YES;
+        }
+    }];
 }
+
+- (void)dy_addCustomNavigationItem:(UIView *)itemView keepSystemItems:(BOOL)needKeepSysItems{
+    __block UIView * barBackgroundView = nil;
+    [self.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([NSStringFromClass([obj class]) isEqualToString:@"_UIBarBackground"]) {
+            barBackgroundView = obj;
+            * stop = YES;
+        }
+    }];
+    if (barBackgroundView) {
+        if (needKeepSysItems) {
+            itemView.frame = barBackgroundView.bounds;
+            [barBackgroundView addSubview:itemView];
+        }else{
+             itemView.frame = barBackgroundView.frame;
+            [self.navigationBar addSubview:itemView];
+        }
+        
+    }
+}
+
 
 @end
 

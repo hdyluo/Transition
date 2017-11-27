@@ -30,8 +30,10 @@
     self.view.backgroundColor = [UIColor whiteColor];   
     _titles = @[@"左滑或点击弹出抽屉",@"自定义导航栏转场",@"modal转场3",@"modal转场4"];
     _vcs = @[@"DYVC1",@"DYVC2",@"DYVC3",@"DYVC4"];
+    self.title = @"标题";
     [self.view addSubview:self.tableView];
     [self addTransition];
+    
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "DYVC2.h"
+#import "UINavigationController+DYTransition.h"
 
 @interface DYVC2 ()
 
@@ -21,6 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor brownColor];
+//    UIView * testView = [UIView new];
+//    testView.backgroundColor = [UIColor redColor];
+    self.title = @"pageTwo";
 }
 
 

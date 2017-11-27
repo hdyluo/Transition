@@ -11,11 +11,15 @@
 
 @interface UINavigationController (DYTransition)
 
-- (void)dy_add_custom_transition;
+- (void)dy_add_custom_transition;           //添加自定义转场，全局的
 
-- (void)hideNavigationBar;
+- (void)dy_hideNavigationBarBackground;     //隐藏毛玻璃背景,全局的
 
-- (void)dy_addTransition:(DYTransition *)transition;
+- (void)dy_hideNavigationItem;              //隐藏navigationItem，全局的
+
+- (void)dy_addCustomNavigationItem:(UIView *)itemView keepSystemItems:(BOOL)needKeepSysItems;
+
+
 
 @end
 

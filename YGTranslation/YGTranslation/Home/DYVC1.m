@@ -48,7 +48,7 @@
     interactor.transitionAction = ^{
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
     };
-    [self dy_setBackAnimator:animator interactor:interactor WithType:DYTransitionTypeDismiss];
+    [self dy_setBackAnimator:animator interactor:interactor];
 }
 
 
