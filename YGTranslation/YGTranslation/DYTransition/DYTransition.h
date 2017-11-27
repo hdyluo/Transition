@@ -11,14 +11,6 @@
 #import "DYTransitionInteractor.h"
 
 
-typedef NS_ENUM(NSInteger,DYTransitionType) {
-    DYTransitionTypePush = 0,
-    DYTransitionTypePop,
-    DYTransitionTypePresent,
-    DYTransitionTypeDismiss
-    
-};
-
 
 @interface DYTransition : NSObject<UIViewControllerTransitioningDelegate,UINavigationControllerDelegate>
 

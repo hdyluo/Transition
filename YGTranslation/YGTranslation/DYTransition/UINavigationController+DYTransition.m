@@ -71,19 +71,17 @@ const char * dy_nav_transition_key;
         }];
     };
     transition.backInteractor = [[DYTransitionInteractor alloc] initWithDirection:DYInteractorDirectionRight];
-    transition.backInteractor.speedControl = 1.3;                   //手势1cm 页面1.3cm
+    transition.backInteractor.speedControl = 1.3;                   //手势滑动1cm 页面滑动1.3cm
     transition.backInteractor.edgeSpacing = DY_NAV_SCREEN_WIDTH;    //全屏侧滑
     transition.backInteractor.canOverPercent = .4;                  //滑动百分比是 %40就可以完成转场，默认情况下，滑动速率超过1000也会完成转场
     
     __weak typeof(self) weakSelf = self;
     transition.backInteractor.transitionAction = ^{
-        NSLog(@"返回");
         if (self.viewControllers.count > 1) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf popViewControllerAnimated:YES];
         }
     };
-    
     [self.view addGestureRecognizer:transition.backInteractor.panGesture];
     [self.interactivePopGestureRecognizer requireGestureRecognizerToFail:transition.backInteractor.panGesture];
     self.delegate = transition;

@@ -61,6 +61,10 @@
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    //连续多次滑动会影响结束或取消过程,判断当前有速度的情况下禁止再加入滑动手势
+    if (self.percentComplete != 0) {
+        return NO;
+    }
     CGPoint startPoint = [gestureRecognizer locationInView:nil];
     switch (self.interactorDirection) {
         case DYInteractorDirectionTop:{                              //向上滑
