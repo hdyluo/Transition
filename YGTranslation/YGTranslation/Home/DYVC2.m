@@ -25,6 +25,8 @@
 //    UIView * testView = [UIView new];
 //    testView.backgroundColor = [UIColor redColor];
     self.title = @"pageTwo";
+    [self dy_addCustomItem:[UIView new]];
+    self.dy_navigationItemView.backgroundColor = [UIColor greenColor];
 }
 
 

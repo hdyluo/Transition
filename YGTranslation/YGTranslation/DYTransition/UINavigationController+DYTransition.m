@@ -14,27 +14,25 @@
 
 
 
-@implementation UIViewController  (_DYNavigationItem)
+@implementation UIViewController  (_DYCustomNavigationItem)
 
 const char * dy_nav_custom_item_key;
 - (void)setDy_navigationItemView:(UIView *)dy_navigationItemView{
-    objc_setAssociatedObject(self, &dy_navigationItemView, dy_navigationItemView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    __block UIView * barBackgroundView = nil;
-//    __block UIView * itemContentView = nil;
-    [self.navigationController.navigationBar.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([NSStringFromClass([obj class]) isEqualToString:@"_UIBarBackground"]) {
-            barBackgroundView = obj;
-            * stop = YES;
-        }
-    }];
+    objc_setAssociatedObject(self, &dy_nav_custom_item_key, dy_navigationItemView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    UIView * barBackgroundView = [self.navigationController _dy_navBar_backgroundView];
+//    UIView * itemView = [self.navigationController _dy_item_contentView];
     if (barBackgroundView) {
-        dy_navigationItemView.frame = barBackgroundView.bounds;
+        dy_navigationItemView.frame = barBackgroundView.bounds;         //第一次初始化的时候，这个frame不正确，所以需要添加自动布局，让它和background重合
         [barBackgroundView addSubview:dy_navigationItemView];
     }
 }
 
 - (UIView *)dy_navigationItemView{
     return objc_getAssociatedObject(self, &dy_nav_custom_item_key);
+}
+
+- (void)dy_addCustomItem:(UIView *)itemView{
+    self.dy_navigationItemView = itemView;
 }
 
 @end
@@ -55,8 +53,11 @@ const char * dy_nav_transition_key;
         [containView addSubview:toVC.view];
         toVC.view.frame = CGRectMake(DY_NAV_SCREEN_WIDTH, 0, toVC.view.frame.size.width, toVC.view.frame.size.height);
         [UIView animateWithDuration:weakTransition.toAnimator.timeInterval animations:^{
-            fromVC.view.frame = CGRectMake(-DY_NAV_SCREEN_WIDTH * .35, 0, fromVC.view.frame.size.width, fromVC.view.frame.size.height);
-            toVC.view.frame = CGRectMake(0, 0, toVC.view.frame.size.width, toVC.view.frame.size.height);
+            fromVC.view.frame = CGRectMake(-DY_NAV_SCREEN_WIDTH * .35, fromVC.view.frame.origin.y, fromVC.view.frame.size.width, fromVC.view.frame.size.height);
+            toVC.view.frame = CGRectMake(0, toVC.view.frame.origin.y, toVC.view.frame.size.width, toVC.view.frame.size.height);
+            if (fromVC.dy_navigationItemView) {
+//                fromVC.dy_navigationItemView.frame =
+            }
         } completion:^(BOOL finished) {
             [context completeTransition:![context transitionWasCancelled]];
         }];
@@ -82,7 +83,7 @@ const char * dy_nav_transition_key;
         shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
         
         [UIView animateWithDuration:.5 animations:^{
-            fromVC.view.frame = CGRectMake(DY_NAV_SCREEN_WIDTH, 0, fromVC.view.frame.size.width, fromVC.view.frame.size.height);
+            fromVC.view.frame = CGRectMake(DY_NAV_SCREEN_WIDTH, fromVC.view.frame.origin.y, fromVC.view.frame.size.width, fromVC.view.frame.size.height);
             shadowView.frame = fromVC.view.frame;
             toVC.view.transform = CGAffineTransformIdentity;
             extraView.alpha = 0;

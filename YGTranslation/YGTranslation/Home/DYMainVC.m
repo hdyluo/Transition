@@ -12,6 +12,7 @@
 #import "YGVC3Animator.h"
 #import "UIView+Snapshot.h"
 #import "UIViewController+DYTransition.h"
+#import "UINavigationController+DYTransition.h"
 
 
 @interface DYMainVC ()<UITableViewDelegate,UITableViewDataSource>{
@@ -34,6 +35,12 @@
     [self.view addSubview:self.tableView];
     [self addTransition];
     
+   
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+   
 }
 
 
