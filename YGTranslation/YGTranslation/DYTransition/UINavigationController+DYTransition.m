@@ -32,7 +32,6 @@ const char * dy_nav_custom_item_key;
         }else{
            dy_navigationItemView.frame = barBackgroundView.frame;
         }
-        
         [self.navigationController.navigationBar addSubview:dy_navigationItemView];
     }
 }

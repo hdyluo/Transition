@@ -19,6 +19,7 @@
     [super viewDidLoad];
     [self dy_add_custom_transition];                        //添加自定义转场
     [self dy_hideNavigationBarBackground];
+    [self dy_hideNavigationItem];
 }
 
 

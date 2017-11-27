@@ -36,7 +36,7 @@
     [self addTransition];
     
     self.dy_navigationItemView = [UIView new];
-    self.dy_navigationItemView.backgroundColor = [UIColor grayColor];
+    self.dy_navigationItemView.backgroundColor = [UIColor greenColor];
 
 }
 
