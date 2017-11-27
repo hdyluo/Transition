@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B048737E1FCBB54300CD10E0 /* UINavigationController+DYTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B048737D1FCBB54300CD10E0 /* UINavigationController+DYTransition.m */; };
+		B04873811FCBBA1500CD10E0 /* DYBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B04873801FCBBA1500CD10E0 /* DYBaseNavigationController.m */; };
 		B05877BC1FC69E33000DD74E /* DYTransitionInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = B05877BB1FC69E33000DD74E /* DYTransitionInteractor.m */; };
 		B05877BF1FC69E4F000DD74E /* DYTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = B05877BE1FC69E4F000DD74E /* DYTransitionAnimator.m */; };
 		B05877C21FC69E67000DD74E /* DYTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B05877C11FC69E67000DD74E /* DYTransition.m */; };
@@ -31,6 +33,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B048737C1FCBB54300CD10E0 /* UINavigationController+DYTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+DYTransition.h"; sourceTree = "<group>"; };
+		B048737D1FCBB54300CD10E0 /* UINavigationController+DYTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+DYTransition.m"; sourceTree = "<group>"; };
+		B048737F1FCBBA1500CD10E0 /* DYBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYBaseNavigationController.h; sourceTree = "<group>"; };
+		B04873801FCBBA1500CD10E0 /* DYBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DYBaseNavigationController.m; sourceTree = "<group>"; };
 		B05877BA1FC69E33000DD74E /* DYTransitionInteractor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYTransitionInteractor.h; sourceTree = "<group>"; };
 		B05877BB1FC69E33000DD74E /* DYTransitionInteractor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DYTransitionInteractor.m; sourceTree = "<group>"; };
 		B05877BD1FC69E4F000DD74E /* DYTransitionAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYTransitionAnimator.h; sourceTree = "<group>"; };
@@ -96,6 +102,8 @@
 				B05877C11FC69E67000DD74E /* DYTransition.m */,
 				B05877C31FC6A367000DD74E /* UIViewController+DYTransition.h */,
 				B05877C41FC6A367000DD74E /* UIViewController+DYTransition.m */,
+				B048737C1FCBB54300CD10E0 /* UINavigationController+DYTransition.h */,
+				B048737D1FCBB54300CD10E0 /* UINavigationController+DYTransition.m */,
 			);
 			path = DYTransition;
 			sourceTree = "<group>";
@@ -119,6 +127,8 @@
 				B0EA2CB41EB2335200407767 /* YGVC3Animator.m */,
 				B05AD5591EADA59F008C4EDB /* DYVC4.h */,
 				B05AD55A1EADA59F008C4EDB /* DYVC4.m */,
+				B048737F1FCBBA1500CD10E0 /* DYBaseNavigationController.h */,
+				B04873801FCBBA1500CD10E0 /* DYBaseNavigationController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -251,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B04873811FCBBA1500CD10E0 /* DYBaseNavigationController.m in Sources */,
 				B05AD5551EADA501008C4EDB /* DYVC2.m in Sources */,
 				B05AD55B1EADA59F008C4EDB /* DYVC4.m in Sources */,
 				B090E9011EB1F46300FAEBCD /* YGVC2Animator.m in Sources */,
@@ -268,6 +279,7 @@
 				B0EA2CB51EB2335200407767 /* YGVC3Animator.m in Sources */,
 				B07528331E8B64A6000C7C3F /* UIViewController+transition.m in Sources */,
 				B05877C21FC69E67000DD74E /* DYTransition.m in Sources */,
+				B048737E1FCBB54300CD10E0 /* UINavigationController+DYTransition.m in Sources */,
 				B090E8FE1EB1F28800FAEBCD /* UIView+Snapshot.m in Sources */,
 				B0D553D81EB07C9800E9C689 /* YGVC1Animator.m in Sources */,
 			);
