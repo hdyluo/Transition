@@ -17,9 +17,6 @@
 
 - (void)dy_hideNavigationItem;              //隐藏navigationItem，全局的
 
-//- (void)dy_addCustomNavigationItem:(UIView *)itemView keepSystemItems:(BOOL)needKeepSysItems;
-
-
 - (UIView *)_dy_item_contentView;
 
 - (UIView *)_dy_navBar_backgroundView;
@@ -29,8 +26,6 @@
 @interface UIViewController (_DYCustomNavigationItem)
 
 @property (nonatomic,strong) UIView * dy_navigationItemView;
-
-- (void)dy_addCustomItem:(UIView *)itemView;
 
 @end
 

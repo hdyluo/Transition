@@ -35,12 +35,22 @@
     [self.view addSubview:self.tableView];
     [self addTransition];
     
-   
+    self.dy_navigationItemView = [UIView new];
+    self.dy_navigationItemView.backgroundColor = [UIColor grayColor];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
    
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
 }
 
 

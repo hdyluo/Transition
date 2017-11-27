@@ -18,12 +18,22 @@
 
 const char * dy_nav_custom_item_key;
 - (void)setDy_navigationItemView:(UIView *)dy_navigationItemView{
+    UIView * lastView =  objc_getAssociatedObject(self, &dy_nav_custom_item_key);
+    if (lastView) {
+        [lastView removeFromSuperview];
+    }
     objc_setAssociatedObject(self, &dy_nav_custom_item_key, dy_navigationItemView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     UIView * barBackgroundView = [self.navigationController _dy_navBar_backgroundView];
-//    UIView * itemView = [self.navigationController _dy_item_contentView];
     if (barBackgroundView) {
-        dy_navigationItemView.frame = barBackgroundView.bounds;         //第一次初始化的时候，这个frame不正确，所以需要添加自动布局，让它和background重合
-        [barBackgroundView addSubview:dy_navigationItemView];
+//        dy_navigationItemView.frame = barBackgroundView.bounds;         //第一次初始化的时候，这个frame不正确，所以对于
+//        [barBackgroundView addSubview:dy_navigationItemView];           //注释部分会展示系统的返回按钮，标题，下面的则是全部覆盖
+        if (barBackgroundView.frame.origin.y == 0) {
+             dy_navigationItemView.frame = CGRectMake(0, -20, barBackgroundView.frame.size.width, barBackgroundView.frame.size.height + 20);
+        }else{
+           dy_navigationItemView.frame = barBackgroundView.frame;
+        }
+        
+        [self.navigationController.navigationBar addSubview:dy_navigationItemView];
     }
 }
 
@@ -31,9 +41,6 @@ const char * dy_nav_custom_item_key;
     return objc_getAssociatedObject(self, &dy_nav_custom_item_key);
 }
 
-- (void)dy_addCustomItem:(UIView *)itemView{
-    self.dy_navigationItemView = itemView;
-}
 
 @end
 
@@ -48,17 +55,21 @@ const char * dy_nav_transition_key;
     transition.toAnimator = [[DYTransitionAnimator alloc] init];
     transition.toAnimator.timeInterval = .3;
     __weak typeof(transition) weakTransition = transition;
+    __weak typeof(self) weakSelf = self;
     transition.toAnimator.animatorBlock = ^(id<UIViewControllerContextTransitioning> context) {
         DY_GENERATE_TRANSITION_CONTEXT
         [containView addSubview:toVC.view];
         toVC.view.frame = CGRectMake(DY_NAV_SCREEN_WIDTH, 0, toVC.view.frame.size.width, toVC.view.frame.size.height);
+        if (toVC.dy_navigationItemView) {
+            toVC.dy_navigationItemView.transform =  CGAffineTransformMakeTranslation(DY_NAV_SCREEN_WIDTH, 0);
+        }
         [UIView animateWithDuration:weakTransition.toAnimator.timeInterval animations:^{
             fromVC.view.frame = CGRectMake(-DY_NAV_SCREEN_WIDTH * .35, fromVC.view.frame.origin.y, fromVC.view.frame.size.width, fromVC.view.frame.size.height);
             toVC.view.frame = CGRectMake(0, toVC.view.frame.origin.y, toVC.view.frame.size.width, toVC.view.frame.size.height);
-            if (fromVC.dy_navigationItemView) {
-//                fromVC.dy_navigationItemView.frame =
-            }
+            toVC.dy_navigationItemView.transform = CGAffineTransformIdentity;
+            fromVC.dy_navigationItemView.transform = CGAffineTransformMakeTranslation(-DY_NAV_SCREEN_WIDTH * .35, 0);
         } completion:^(BOOL finished) {
+//            [fromVC.dy_navigationItemView removeFromSuperview];           //为了避免popToRoot,和popToViewControllers所以不能让navigationBar挂载过多的自定义视图。
             [context completeTransition:![context transitionWasCancelled]];
         }];
     };
@@ -87,6 +98,8 @@ const char * dy_nav_transition_key;
             shadowView.frame = fromVC.view.frame;
             toVC.view.transform = CGAffineTransformIdentity;
             extraView.alpha = 0;
+            fromVC.dy_navigationItemView.transform = CGAffineTransformMakeTranslation(DY_NAV_SCREEN_WIDTH, 0);
+            toVC.dy_navigationItemView.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
             [shadowView removeFromSuperview];
             [extraView removeFromSuperview];
@@ -95,7 +108,8 @@ const char * dy_nav_transition_key;
             if (isCanceled) {
                 toVC.view.transform = CGAffineTransformIdentity;
                 [toVC.view removeFromSuperview];
-               
+            }else{
+                [fromVC.dy_navigationItemView removeFromSuperview];//如果是正常完成的话，需要移除视图
             }
         }];
     };
@@ -104,7 +118,7 @@ const char * dy_nav_transition_key;
     transition.backInteractor.edgeSpacing = DY_NAV_SCREEN_WIDTH;    //全屏侧滑
     transition.backInteractor.canOverPercent = .4;                  //滑动百分比是 %40就可以完成转场，默认情况下，滑动速率超过1000也会完成转场
     
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
     transition.backInteractor.transitionAction = ^{
         if (self.viewControllers.count > 1) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -128,19 +142,6 @@ const char * dy_nav_transition_key;
     [self _dy_item_contentView].hidden = YES;
 }
 
-- (void)dy_addCustomNavigationItem:(UIView *)itemView keepSystemItems:(BOOL)needKeepSysItems{
-     UIView * barBackgroundView = [self _dy_navBar_backgroundView];
-    if (barBackgroundView) {
-        if (needKeepSysItems) {
-            itemView.frame = barBackgroundView.bounds;
-            [barBackgroundView addSubview:itemView];
-        }else{
-             itemView.frame = barBackgroundView.frame;
-            [self.navigationBar addSubview:itemView];
-        }
-        
-    }
-}
 
 
 - (UIView *)_dy_item_contentView{
