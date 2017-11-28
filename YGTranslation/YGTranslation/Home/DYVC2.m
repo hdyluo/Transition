@@ -27,12 +27,6 @@
     self.dy_navigationItemView = [DYCustomNavigationItem new];
     self.dy_navigationItemView.backgroundColor = [UIColor redColor];
     self.title = @"pageTwo";
-    UIButton * btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btn setTitle:@"点我" forState:UIControlStateNormal];
-    [self.dy_navigationItemView addSubview:btn];
-    btn.frame = CGRectMake(100, 40, 100, 40);
-    [btn addTarget:self action:@selector(btnClicked) forControlEvents:UIControlEventTouchUpInside];
-//    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
 }
 - (void)btnClicked{
     NSLog(@"点击了按钮");

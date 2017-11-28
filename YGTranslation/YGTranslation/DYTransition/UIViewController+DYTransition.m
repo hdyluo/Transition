@@ -4,7 +4,7 @@
 //
 //  Created by 黄德玉 on 2017/11/23.
 //  Copyright © 2017年 黄德玉. All rights reserved.
-//
+//fullscreen 和nav转场结束的时候回将fromVC从containerView移除。custom转场不会
 
 #import "UIViewController+DYTransition.h"
 #import <objc/runtime.h>
@@ -44,6 +44,7 @@ const char * dy_transition_weak_key;
     }
     vc.transitioningDelegate = transition;
     vc.dy_transition = transition;
+    vc.modalPresentationStyle = UIModalPresentationCustom;  //custom的话，container不会移除，fullScreen会从container移除。
     [self presentViewController:vc animated:YES completion:nil];
 }
 

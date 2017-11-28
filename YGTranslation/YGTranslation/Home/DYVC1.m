@@ -30,7 +30,7 @@
     DYTransitionAnimator * animator = [[DYTransitionAnimator alloc] init];
     animator.animatorBlock = ^(id<UIViewControllerContextTransitioning> context) {
         DY_GENERATE_TRANSITION_CONTEXT
-        [containView addSubview:toVC.view];                             //对于fullscreenmodal转场来说，转场开始tovc.view会自动加入到containView中，对于Navigation转场来说，需要手动加入
+//        [containView addSubview:toVC.view];                             //对于fullscreenmodal转场来说，转场开始tovc.view会自动加入到containView中，对于Navigation转场转场来说，需要手动加入。对于custom转场来说.toVC.view就没有从container里移除，所以不能加containerView中
         [UIView animateWithDuration:.5 animations:^{
             fromVC.view.transform = CGAffineTransformMakeTranslation(-200, 0);
             toVC.view.transform = CGAffineTransformIdentity;
