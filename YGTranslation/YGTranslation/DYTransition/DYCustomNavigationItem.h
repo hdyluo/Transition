@@ -13,4 +13,6 @@
 @property (nonatomic,strong) UILabel * titleLabel;      //核心元素，标题
 @property (nonatomic,strong) UIButton * backBtn;        //核心元素返回按钮
 
+- (void)hideBackBtn;
+
 @end

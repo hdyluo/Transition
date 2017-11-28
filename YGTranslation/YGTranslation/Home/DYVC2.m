@@ -23,9 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor brownColor];
-    self.title = @"pageTwo";
-    self.dy_navigationItemView = [UIView new];
+    
+    self.dy_navigationItemView = [DYCustomNavigationItem new];
     self.dy_navigationItemView.backgroundColor = [UIColor redColor];
+    self.title = @"pageTwo";
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setTitle:@"点我" forState:UIControlStateNormal];
     [self.dy_navigationItemView addSubview:btn];

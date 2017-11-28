@@ -49,20 +49,32 @@
 
 - (void)dy_setTitle:(NSString *)title{
     [self dy_setTitle:title];
+    if (self.title) {
+        self.dy_navigationItemView.titleLabel.text = self.title;
+    }
 }
 
 const char * dy_nav_custom_item_key;
-- (void)setDy_navigationItemView:(UIView *)dy_navigationItemView{
-    UIView * lastView =  objc_getAssociatedObject(self, &dy_nav_custom_item_key);
+- (void)setDy_navigationItemView:(DYCustomNavigationItem *)dy_navigationItemView{
+    UIView * lastView = objc_getAssociatedObject(self, &dy_nav_custom_item_key);
     if (lastView) {
         [lastView removeFromSuperview];
     }
     objc_setAssociatedObject(self, &dy_nav_custom_item_key, dy_navigationItemView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     dy_navigationItemView.frame = CGRectMake(0, 0, DY_NAV_SCREEN_WIDTH, DY_NAVIGATION_BAR_HEIGHT);
     [self.view addSubview:dy_navigationItemView];
+    if (self.navigationController.viewControllers.count == 1) {
+        [dy_navigationItemView hideBackBtn];
+    }else{
+         [dy_navigationItemView.backBtn addTarget:self action:@selector(dy_backClicked) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
-- (UIView *)dy_navigationItemView{
+- (void)dy_backClicked{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (DYCustomNavigationItem *)dy_navigationItemView{
     return objc_getAssociatedObject(self, &dy_nav_custom_item_key);
 }
 
@@ -94,6 +106,7 @@ const char * dy_nav_transition_key;
     };
     
     transition.backAnimator = [[DYTransitionAnimator alloc] init];
+    transition.backAnimator.timeInterval = .4;
     transition.backAnimator.animatorBlock = ^(id<UIViewControllerContextTransitioning> context) {
         DY_GENERATE_TRANSITION_CONTEXT
         [containView insertSubview:toVC.view belowSubview:fromVC.view];
@@ -109,10 +122,10 @@ const char * dy_nav_transition_key;
         [containView insertSubview:shadowView belowSubview:fromVC.view];
         shadowView.layer.shadowOpacity = 0.6;
         shadowView.layer.shadowRadius = 4;
-        shadowView.layer.shadowOffset = CGSizeMake(-5, 5);
+        shadowView.layer.shadowOffset = CGSizeMake(-5, 0);
         shadowView.layer.shadowColor = [UIColor grayColor].CGColor;
         
-        [UIView animateWithDuration:.5 animations:^{
+        [UIView animateWithDuration:weakTransition.backAnimator.timeInterval animations:^{
             fromVC.view.frame = CGRectMake(DY_NAV_SCREEN_WIDTH, fromVC.view.frame.origin.y, fromVC.view.frame.size.width, fromVC.view.frame.size.height);
             shadowView.frame = fromVC.view.frame;
             toVC.view.transform = CGAffineTransformIdentity;
