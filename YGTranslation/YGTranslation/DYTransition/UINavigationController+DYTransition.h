@@ -8,26 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "DYTransition.h"
+#import "DYCustomNavigationItem.h"
 
 @interface UINavigationController (DYTransition)
 
 - (void)dy_add_custom_transition;           //添加自定义转场，全局的
 
-- (void)dy_hideNavigationBarBackground;     //隐藏毛玻璃背景,全局的
-
-- (void)dy_hideNavigationItem;              //隐藏navigationItem，全局的
-
-- (UIView *)_dy_item_contentView;
-
-- (UIView *)_dy_navBar_backgroundView;
+- (void)dy_UseCustomNavigationItem;         //使用自定义导航item
 
 @end
 
 @interface UIViewController (_DYCustomNavigationItem)
 
-@property (nonatomic,strong) UIView * dy_navigationItemView;
+@property (nonatomic,strong) DYCustomNavigationItem * dy_navigationItemView;
 
 @end
+
 
 
 

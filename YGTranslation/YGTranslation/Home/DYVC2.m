@@ -19,15 +19,22 @@
     NSLog(@"%@释放",NSStringFromClass([self class]));
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor brownColor];
-//    UIView * testView = [UIView new];
-//    testView.backgroundColor = [UIColor redColor];
     self.title = @"pageTwo";
-//    [self dy_addCustomItem:[UIView new]];
     self.dy_navigationItemView = [UIView new];
     self.dy_navigationItemView.backgroundColor = [UIColor redColor];
+    UIButton * btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btn setTitle:@"点我" forState:UIControlStateNormal];
+    [self.dy_navigationItemView addSubview:btn];
+    btn.frame = CGRectMake(100, 40, 100, 40);
+    [btn addTarget:self action:@selector(btnClicked) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
+}
+- (void)btnClicked{
+    NSLog(@"点击了按钮");
 }
 
 

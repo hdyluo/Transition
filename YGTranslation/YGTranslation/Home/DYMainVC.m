@@ -29,15 +29,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];   
-    _titles = @[@"左滑或点击弹出抽屉",@"自定义导航栏转场",@"modal转场3",@"modal转场4"];
-    _vcs = @[@"DYVC1",@"DYVC2",@"DYVC3",@"DYVC4"];
+    _titles = @[@"左滑或点击弹出抽屉",@"自定义导航栏转场",@"modal转场3",@"modal转场4",@"modal转场4",@"modal转场4",@"modal转场4",@"modal转场4",@"modal转场4",@"modal转场4",@"modal转场4",@"modal转场4",@"modal转场4"];
+    _vcs = @[@"DYVC1",@"DYVC2",@"DYVC3",@"DYVC4",@"DYVC4",@"DYVC4",@"DYVC4",@"DYVC4",@"DYVC4",@"DYVC4",@"DYVC4",@"DYVC4",@"DYVC4"];
     self.title = @"标题";
     [self.view addSubview:self.tableView];
     [self addTransition];
     
-    self.dy_navigationItemView = [UIView new];
+    self.dy_navigationItemView = [[DYCustomNavigationItem alloc] init];
     self.dy_navigationItemView.backgroundColor = [UIColor greenColor];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"哈哈" style:0 target:self action:@selector(itemClicked)];
+}
 
+- (void)itemClicked{
+    NSLog(@"点击右侧按钮");
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -49,9 +53,9 @@
     [super viewWillAppear:animated];
 }
 
-- (void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
-}
+//- (void)viewWillLayoutSubviews{
+//    [super viewWillLayoutSubviews];
+//}
 
 
 #pragma mark - delegate and datasource
@@ -127,6 +131,7 @@
 - (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+        _tableView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }
